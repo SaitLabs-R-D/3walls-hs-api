@@ -1,0 +1,26 @@
+ENVIRONMENT="development or production or staging"
+IS_LOCAL="true or false, false means it is deployed to cloud"
+PORT="optional port number"
+
+LOGIN_TOKEN_SECRET="random string"
+WATCH_TOKEN_SECRET="random string"
+FIRST_LOGIN_SECRET="random string"
+
+DB_CONNECTION_STRING="mongo connection string"
+DB_NAME="db name"
+
+REDIS_HOST="redis address"
+REDIS_PORT="redis port"
+REDIS_PASSWORD="redis password"
+
+SITE_URL="http://localhost:3000/login"
+
+SEND_GRID_KEY="send grid api key"
+SEND_GRID_SENDER="verified mail in send grid"
+THREE_WALL_EMAIL="3wall@saitechs.io"
+
+GOOGLE_APPLICATION_CREDENTIALS="full path to google credentials json file"
+BUCKET_NAME="bucket name"
+BUCKET_ALLOWED_ORIGINS="bucket allowed origins for cors"
+
+COOKIE_DOMAIN="localhost"
