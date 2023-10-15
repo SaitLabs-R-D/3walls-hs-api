@@ -39,6 +39,6 @@ jobs:
       with:
         service: ${{ github.event.pull_request.base.ref == 'main' && 'prod-home-api' || 'dev-home-api' }}
         image: gcr.io/walls-immersive/api-home:${{ env.COMMIT_SHA }}
-        region: ${{ github.event.pull_request.base.ref == 'main' && 'europe-west3' || 'europe-west2' }}
+        region: ${{ github.event.pull_request.base.ref == 'main' && 'europe-west1' || 'europe-west4' }}
       env:
         COMMIT_SHA: ${{ github.event.pull_request.base.ref == 'main' && github.event.pull_request.head.sha || github.sha }}
