@@ -22,7 +22,7 @@ jobs:
         gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_ACCOUNT }}
         registry: gcr.io
         project_id: walls-immersive
-        image_name: api
+        image_name: api-home
         image_tag: ${{ github.sha }}
         dockerfile: ./Dockerfile
         context: ./
@@ -37,8 +37,8 @@ jobs:
     - id: 'deploy'
       uses: 'google-github-actions/deploy-cloudrun@v1'
       with:
-        service: ${{ github.event.pull_request.base.ref == 'main' && 'prod-3walls-api' || 'dev-3walls-api' }}
-        image: gcr.io/walls-immersive/api:${{ env.COMMIT_SHA }}
-        region: ${{ github.event.pull_request.base.ref == 'main' && 'europe-west1' || 'europe-west4' }}
+        service: ${{ github.event.pull_request.base.ref == 'main' && 'prod-home-api' || 'dev-home-api' }}
+        image: gcr.io/walls-immersive/api-home:${{ env.COMMIT_SHA }}
+        region: ${{ github.event.pull_request.base.ref == 'main' && 'europe-west3' || 'europe-west2' }}
       env:
         COMMIT_SHA: ${{ github.event.pull_request.base.ref == 'main' && github.event.pull_request.head.sha || github.sha }}
