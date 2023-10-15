@@ -275,9 +275,8 @@ def publish_draft_lesson(
                 if not part.panoramic_url and not part.gcp_path:
                     return not_valid_res
             else:
-                for screen in part.screens:
-                    if not screen.url:
-                        return not_valid_res
+                if not part.screens[1].url:
+                    return not_valid_res
 
         published_lesson = PublishedLessons(**draft_lesson.dict())
 
