@@ -21,6 +21,12 @@ from fastapi.middleware.cors import CORSMiddleware
 
 origins = [EnvVars.SITE_URL]
 
+if isinstance(EnvVars.CORS_ORIGINS, list):
+    origins.extend(EnvVars.CORS_ORIGINS)
+else:
+    if EnvVars.CORS_ORIGINS:
+        origins.extend(EnvVars.CORS_ORIGINS)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,

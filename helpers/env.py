@@ -1,6 +1,6 @@
 from pydantic import BaseSettings, root_validator
 import secrets
-from typing import Optional
+from typing import Optional, Union
 
 
 class EnvVariabels(BaseSettings):
@@ -40,6 +40,7 @@ class EnvVariabels(BaseSettings):
     BUCKET_ALLOWED_ORIGINS: str
 
     COOKIE_DOMAIN: Optional[str] = None
+    CORS_ORIGINS: Union[list[str], str] = []
 
     @root_validator
     def validate(cls, values):
@@ -47,6 +48,9 @@ class EnvVariabels(BaseSettings):
             if "URL" in key:
                 if not value.startswith("http"):
                     raise ValueError(f"{key} must start with http or https")
+            if key == "CORS_ORIGINS":
+                if isinstance(value, str):
+                    values[key] = value.split(",")
 
         return values
 
