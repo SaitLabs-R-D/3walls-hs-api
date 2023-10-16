@@ -24,7 +24,6 @@ def register_as_guest(data: models.RegisterAsGuestPayload):
     if guest_role.failure or guest_role.not_found:
         return guest_role.into_response()
 
-    # TODO change to transaction
     user_res = inserts.insert_new_guest_user(
         guest_role=guest_role.value,
         email=data.email,
@@ -38,16 +37,16 @@ def register_as_guest(data: models.RegisterAsGuestPayload):
 
     user = user_res.value
 
-    token = tokens.generate_registration_token(str(user.id))
+    # token = tokens.generate_registration_token(str(user.id))
 
-    update_res = updates.set_user_registration_token(user.id, token)
+    # update_res = updates.set_user_registration_token(user.id, token)
 
-    if update_res.failure:
-        return responses.ApiError()
+    # if update_res.failure:
+    #     return responses.ApiError()
 
-    EMAIL_SERVICE.send_email_verification_mail(
-        user.email, user.email, user.full_name, token, True
-    )
+    # EMAIL_SERVICE.send_email_verification_mail(
+    #     user.email, user.email, user.full_name, token, True
+    # )
 
     return responses.ApiSuccess()
 
