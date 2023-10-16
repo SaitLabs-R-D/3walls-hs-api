@@ -48,7 +48,18 @@ def register_as_guest(data: models.RegisterAsGuestPayload):
     #     user.email, user.email, user.full_name, token, True
     # )
 
-    return responses.ApiSuccess()
+    get_me_res = queries.get_user_for_get_me(user.id)
+
+    if get_me_res.failure:
+        if get_me_res.not_found:
+            return responses.ApiError(message="user not found", code=404)
+        return responses.ApiError(message="something went wrong", code=500)
+
+    res = responses.ApiSuccess(data=get_me_res.value)
+
+    cookies.set_user_access_token(res, user_res.value)
+
+    return res
 
 
 @router.put("/verify", dependencies=[Depends(guest_required)])
