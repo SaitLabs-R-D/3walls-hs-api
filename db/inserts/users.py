@@ -38,6 +38,7 @@ def insert_new_guest_user(
         first_name=first_name,
         last_name=last_name,
         role=guest_role,
+        registration_completed=True,
     )
 
     return _insert_new_user(user)
