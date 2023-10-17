@@ -39,7 +39,7 @@ class RediractsPaths(str, Enum):
 
 
 class Cookeys(str, Enum):
-    ACCESS_TOKEN = "access_token"
+    ACCESS_TOKEN = "hs_access_token"
 
 
 class CookiesExpiration(str, Enum):
